@@ -34,4 +34,4 @@ Our app is a simple, accessible campsite reservation application that replaces t
 We also have a wiki page where you can see everything related to the development of this app, from the meeting minutes to CRC cards. Feel free to dive in using this link: https://github.com/CMPUT301F26clover/clover-events/wiki
 
 ## License
-[Apache License](https://github.com/CMPUT301F26clover/clover-events/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/CMPUT301F26clover/clover-events/blob/main/LICENSE)
