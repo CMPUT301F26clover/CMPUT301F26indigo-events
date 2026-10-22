@@ -1,0 +1,108 @@
+package com.example.camp_serve.ui.admin.campsites
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+
+private data class Campsite(
+    val name: String,
+    val location: String,
+    val owner: String
+)
+private val sampleCampsites =
+    listOf(
+        Campsite("Lakeside Camp", "Banff",  "Alex"),
+        Campsite("Pine Ridge", "Jasper", "Sam")
+    )
+
+@Composable
+fun CampsitesScreen(navController: NavController) {
+    var searchText by remember { mutableStateOf("") }
+    val campsites = remember { mutableStateListOf(*sampleCampsites.toTypedArray()) }
+
+    val filtered = campsites.filter {
+        it.name.contains(searchText, ignoreCase = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp)
+    ) {
+        Text(
+            text = "Campsites",
+            fontSize = 30.sp
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TextField(
+            value = searchText,
+            onValueChange = { searchText = it },
+            label = { Text("Search Campsites") },
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        )
+
+        LazyColumn {
+            items(filtered) { campsite ->
+                CampsiteRow(campsite)
+            }
+        }
+    }
+}
+
+@Composable
+private fun CampsiteRow(campsite: Campsite) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .background(Color(0xFFFEF7FF))
+            .border(1.dp, Color(0xFF000000))
+            .padding(2.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(campsite.name, fontWeight = FontWeight.Bold)
+            Text(campsite.location, fontSize = 12.sp)
+            Text(campsite.owner, fontSize = 12.sp)
+        }
+        Button(onClick = {}) {
+            Text("Remove")
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun CampsitesScreenPreview() {
+    CampsitesScreen(navController = rememberNavController())
+}
