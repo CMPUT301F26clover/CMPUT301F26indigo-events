@@ -105,7 +105,7 @@ private fun ImageRow(images: ImageItem) {
 
         if (imageEnlarge) {
             Dialog(onDismissRequest = { imageEnlarge = false }) {
-                Image(
+                Image( // https://developer.android.com/codelabs/basic-android-kotlin-compose-add-images#2
                     painter = painterResource(id = R.drawable.blank_profile_picture),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
