@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,11 +55,13 @@ fun CampsitesScreen(navController: NavController) {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
         Text(
             text = "Campsites",
-            fontSize = 30.sp
+            fontSize = 30.sp,
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+            color = Color(0xFF715CAA)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -80,13 +84,13 @@ fun CampsitesScreen(navController: NavController) {
 
 @Composable
 private fun CampsiteRow(campsite: Campsite) {
+    var removeAlert by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
             .background(Color(0xFFFEF7FF))
             .border(1.dp, Color(0xFF000000))
-            .padding(2.dp),
+            .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(modifier = Modifier.weight(1f)) {
@@ -94,8 +98,30 @@ private fun CampsiteRow(campsite: Campsite) {
             Text(campsite.location, fontSize = 12.sp)
             Text(campsite.owner, fontSize = 12.sp)
         }
-        Button(onClick = {}) {
+        Button(onClick = {removeAlert = true}) {
             Text("Remove")
+        }
+
+        if (removeAlert) {
+            AlertDialog(
+                onDismissRequest = { removeAlert = false },
+                title = { Text("Remove this campsite?") },
+                text = { Text("This removes the listing and it's lottery. This can't be undone") },
+                confirmButton = {
+                    TextButton(onClick = {
+                        removeAlert = false
+                    }) {
+                        Text("Remove")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        removeAlert = false
+                    }) {
+                        Text("Cancel")
+                    }
+                }
+            )
         }
     }
 }
