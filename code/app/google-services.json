@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610256908817",
+    "project_id": "camp-serve-b4f79",
+    "storage_bucket": "camp-serve-b4f79.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610256908817:android:485ff29919b5b96d1b77b0",
+        "android_client_info": {
+          "package_name": "com.example.camp_serve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt-hELlcVj64yLkueTX0AjVmWtQhv4DnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
