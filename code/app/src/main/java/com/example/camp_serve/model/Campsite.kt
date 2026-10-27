@@ -17,6 +17,7 @@ package com.example.camp_serve.model
  * @property latitude map latitude
  * @property longitude map longitude
  * @property imageUrl link to the campsite image, empty if none
+ * @property availableDates date of when campsite is open, in the "YYYY-MM-DD" format.
  */
 data class Campsite(
     val id: String = "",
@@ -31,5 +32,6 @@ data class Campsite(
     val tags: List<String> = emptyList(),
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
-    val imageUrl: String = ""
+    val imageUrl: String = "",
+    val availableDates: List<String> = emptyList(),
 )
